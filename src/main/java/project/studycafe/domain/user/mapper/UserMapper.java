@@ -25,7 +25,7 @@ public interface UserMapper {
 
     int checkNicknameExist(String nickname);
     
-    int checkMyNicknameExist(String nickname);
+    Integer checkMyNicknameExist(String nickname);
 
 	PatchUserReq getUserByNick(String nickname);
 

@@ -183,7 +183,7 @@ public class UserServiceImpl implements UserService {
 		return userMapper.getPlaceInfoByUserId(userId);
 	}
 
-	public int myNicknameDuplicateCheck(String nickname) {
+	public Integer myNicknameDuplicateCheck(String nickname) {
 		return userMapper.checkMyNicknameExist(nickname);
 	}
 

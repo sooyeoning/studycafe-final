@@ -47,7 +47,8 @@ public class MypageController {
 			BindingResult bindingResult) throws Exception {
 
 		// 중복체크
-		if (userService.myNicknameDuplicateCheck(patchUserReq.getNickname()) != patchUserReq.getId()) {
+		if (userService.myNicknameDuplicateCheck(patchUserReq.getNickname())!=null&&
+				userService.myNicknameDuplicateCheck(patchUserReq.getNickname()) != patchUserReq.getId()) {
 			bindingResult.rejectValue("nickname", "invalid.nickname", new Object[] { patchUserReq.getNickname() },
 					"이미 사용중인 닉네임입니다");
 		}
