@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper
+	namespace="project.studycafe.domain.ticket.mapper.TicketMapper">
+
+<!-- 사용자(1) : 티켓(n) 
+	 즉 부모 테이블(1)에서는 내 자식들이 누구인지 정보를 넣을 필요가 없고, 
+	 자식 테이블(N)에서만 각각의 자식들이 자신의 부모 정보(FK)를 넣음 으로써 관계를 표현할 수 있다. -->
+	 
+	<insert id="insertTicket" parameterType="ticketEntity">
+		insert into ticket
+			(code, user_id, residual_times, name)
+		values
+			(#{code}, #{userId}, #{residualTimes}, #{name})
+	</insert>
+	
+	<select id="selectMyTickets" parameterType="int" resultType="myTicketRes">
+		select 
+			code, 
+			residual_times, 
+			t.name, 
+			seat_id, 
+			place_id, 
+			p.name as placeName
+		from ticket t
+		left join places p on p.id = t.place_id
+		where user_id = #{userId}
+	</select>
+	
+	<select id="selectTicketInfo" parameterType="String" resultType="myTicketRes">
+		select 
+			code, 
+			residual_times, 
+			t.name, 
+			seat_id, 
+			place_id, 
+			p.name as placeName
+		from ticket t
+		left join places p on p.id = t.place_id
+		where code = #{code}
+	</select>
+	
+	<select id="checkTicketRegister" parameterType="checkTicketAvailabilityReq" resultType="String">
+		select code
+		from ticket
+		where 
+			user_id = #{userId} 
+			and place_id=#{placeId}	
+			and residual_times != '00:00:00'
+	</select> 
+	
+	<select id="checkTicketPurchase" parameterType="int" resultType="String">
+		select code
+		from ticket
+		where 
+			user_id = #{userId} 
+			and residual_times != '00:00:00'
+	</select>
+	
+	<!-- 티켓 테이블에 사용할 지점 저장 -->
+	<update id="updateTicketPlaceId" parameterType="patchTicketCodeReq">
+		update ticket
+		set place_id = #{placeId}
+		where code = #{code}
+	</update>
+	
+	<update id="updateTicketHourReservInfo" parameterType="patchTicketReservReq">
+		update ticket,
+			   (select ifnull(start_time, current_timestamp()) as start_time from ticket where code=#{code}) b
+		set 
+			seat_id = #{seatId},
+			ticket.start_time = b.start_time
+		where code=#{code}
+	</update>
+	
+	<update id="updateTicketPeriodReservInfo" parameterType="patchTicketReservReq">
+		update ticket,
+			   (select ifnull(start_time, current_timestamp()) as start_time from ticket where code=#{code}) b,
+			   (select ifnull(end_time, date_add(current_date(), interval #{endTime} ${unitOfTime}) ) as end_time from ticket where code=#{code}) c
+		set 
+			seat_id = #{seatId},
+			ticket.start_time = b.start_time,
+			ticket.end_time = c.end_time
+		where code=#{code}
+	</update>
+	
+	<update id="updateTicketResidualTimeToZero" parameterType="String" >
+		update ticket
+		set residual_times='00:00:00'
+		where code=#{code}
+	</update>
+	
+	<!-- 현재시간 - 반납시간 -->
+	<update id="updateResidualTime" parameterType="updateResidualTimeReq" >
+		update ticket
+		set residual_times = #{residualTime},
+			end_time = current_timestamp()
+		where code=#{code} 
+	</update>
+	
+	<select id="selectUsedTime" parameterType="String" resultType="String">
+		select timediff(now(), start_time)
+		from seats 
+		where ticket_code=#{code}
+	</select>
+	
+	<select id="selectResidualTime" parameterType="getResidualTimeReq" resultType="String">
+		select if(
+		((select timediff(residual_times, #{usedTime})
+		from ticket 
+		where code=#{code})>0),
+		(select timediff(residual_times, #{usedTime})
+		from ticket 
+		where code=#{code}),
+		'00:00:00')
+	</select>
+	
+	
+</mapper>

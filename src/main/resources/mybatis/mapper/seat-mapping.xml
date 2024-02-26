@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper
+	namespace="project.studycafe.domain.seats.mapper.SeatMapper">
+
+	<!-- 이용권 시간만큼 추가해서 끝나는 시간 저장 -->
+	<!-- <insert id="insertReservation" parameterType="seatsEntity">
+		insert into seats
+		(place_id, id, user_id, seat_status, start_time, ticket_code)
+		values
+		(#{placeId}, #{id}, #{userId}, #{seatStatus}, current_timestamp(), #{ticketCode})
+	</insert> -->
+	
+	<update id="updateReservation" parameterType="seatsEntity">
+		update seats
+		set ticket_code=#{ticketCode}
+			,start_time=now()
+		where place_id=#{placeId} 
+				and id=#{id}
+	</update>
+	
+	<select id="checkSeatAvailability" parameterType="checkSeatAvailabilityReq" resultType="String">
+		select ticket_code
+		from seats
+		where place_id = #{placeId} and id = #{seatId}
+	</select> 
+	
+	<select id="checkMyReservationStatus" parameterType="checkMyReservationStatusReq" resultType="String">
+		select ticket_code
+		from seats s
+		join ticket t 
+		ON t.seat_id = s.id and t.place_id=s.place_id
+		where t.user_id=#{userId}
+			  and ticket_code is not null
+	</select> 
+	
+	<select id="getReservedSeatList" parameterType="int" resultType="getReservedSeatListRes">
+		SELECT 
+ 			s.id, 
+ 			t.end_time, 
+ 			t.user_id
+		FROM
+    		seats s
+        JOIN ticket t
+        ON t.seat_id = s.id and t.place_id=s.place_id
+		WHERE
+			s.place_id = #{placeId}
+        	AND s.ticket_code is not null
+	</select>
+ 
+	<select id="getReservedSeatListForReturn" resultType="getReservedSeatListForReturnRes">
+			SELECT 
+	 			t.residual_times,
+	 			t.end_time,
+	 			t.code,
+	 			t.seat_id,
+	 			t.user_id,
+	 			t.place_id
+			FROM
+	    		seats s
+	        JOIN ticket t 
+	        	ON t.seat_id = s.id and t.place_id=s.place_id
+			WHERE
+				s.ticket_code is not null
+	</select>
+
+	<select id="getTimeDiff" parameterType="String" resultType="int">
+		select TIMESTAMPDIFF(second, current_timestamp(), #{endTime})
+	</select>
+	
+	<select id="getPeriodDiff" parameterType="String" resultType="int">
+	    SELECT DATEDIFF(end_time ,current_timestamp()) 
+	    FROM ticket
+	    where code=#{code}
+	</select>
+	
+	<select id="getMyReservedSeatId" parameterType="getMySeatReq" resultType="int">
+		select s.id
+		from seats s
+		join ticket t
+	        ON t.seat_id = s.id and t.place_id=s.place_id
+		where 
+			t.user_id = #{userId} 
+			and s.place_id=#{placeId} 
+			and s.ticket_code is not null
+	</select>
+	
+	<select id="getMySeatTicketCode" parameterType="getMySeatTicketCodeReq" resultType="String">
+		select s.ticket_code
+		from seats s
+		join ticket t 
+	        ON t.seat_id = s.id and t.place_id=s.place_id
+		where 
+			t.user_id = #{userId}
+			and s.id=#{id}
+	</select>
+
+	<update id="returnMySeat" parameterType="String">
+		update seats
+		set 
+			ticket_code = null
+		where ticket_code=#{ticketCode}
+	</update>
+	
+	
+	
+</mapper>

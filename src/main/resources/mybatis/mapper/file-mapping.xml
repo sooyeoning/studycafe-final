@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="project.studycafe.domain.util.FileMapper">
+
+	<insert id="insertUserImage" parameterType="userImageEntity">
+		insert into
+		user_image(file_path, user_id, origin_file_name, upload_file_name)
+		values(#{filePath}, #{userId}, #{originFileName}, #{uploadFileName})
+	</insert>
+
+	<insert id="insertPlaceImage"
+		parameterType="placeImageEntity">
+		insert into
+		place_image(file_path, place_id,
+		origin_file_name, upload_file_name, role)
+		values(#{filePath},#{placeId}, #{originFileName}, #{uploadFileName}, #{role})
+	</insert>
+
+	<select id="selectFile" parameterType="int" resultType="String">
+		select
+		upload_file_name
+		from user_image
+		where user_id=#{userId}
+	</select>
+
+	<update id="updateUserImage" parameterType="userImageEntity">
+		update user_image
+		set
+		file_path = #{filePath},
+		origin_file_name = #{originFileName},
+		upload_file_name = #{uploadFileName}
+		where user_id=#{userId}
+	</update>
+
+	<!-- 장소 모든 이미지 리스트로 가져오기 -->
+	<select id="selectPlaceImages" parameterType="int" resultType="String">
+		select
+		upload_file_name
+		from place_image
+		where place_id=#{placeId}
+	</select>
+
+	<!-- 해당 장소에 대표이미지 pk 찾기 -->
+	<select id="selectPlaceImageById" parameterType="int" resultType="int">
+		select id
+		from place_image
+		where place_id=#{placeId} and role=#{role}
+	</select>
+	
+	<update id="updatePlaceImage" parameterType="placeImageEntity">
+		update place_image
+		set 
+			file_path = #{filePath},
+			origin_file_name = #{originFileName},
+			upload_file_name = #{uploadFileName},
+			upload_date = curdate()
+		where place_id=#{placeId} and role=#{role}
+	</update>
+	
+
+	
+
+</mapper>

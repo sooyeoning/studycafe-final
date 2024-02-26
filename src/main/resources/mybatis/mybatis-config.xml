@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+	<settings>
+		<setting name="mapUnderscoreToCamelCase" value="true" />
+	</settings>
+
+	<typeAliases>
+		<typeAlias
+			type="project.studycafe.domain.user.model.UserEntity" alias="userEntity" />
+		<typeAlias
+			type="project.studycafe.domain.user.model.SignUpReq" alias="signUpReq" />
+		<typeAlias
+			type="project.studycafe.domain.user.model.LoginReq" alias="loginReq" />
+		<typeAlias
+			type="project.studycafe.domain.user.model.PatchUserReq" alias="patchUserReq" />
+		<typeAlias
+			type="project.studycafe.domain.user.model.PatchUserPwReq" alias="patchUserPwReq" />
+		<typeAlias
+			type="project.studycafe.domain.user.model.FindIdReq" alias="findIdReq" />
+		<typeAlias
+			type="project.studycafe.domain.user.model.FindPwReq" alias="findPwReq" />
+		<typeAlias
+			type="project.studycafe.domain.user.model.UpdatePwReq" alias="updatePwReq" />
+		<typeAlias
+			type="project.studycafe.domain.user.model.GetPlaceInfoByUserIdRes" alias="getPlaceInfoByUserIdRes" />
+		<typeAlias
+			type="project.studycafe.domain.user.model.PatchUserPlaceIdReq" alias="patchUserPlaceIdReq" />	
+		<typeAlias
+			type="project.studycafe.domain.place.model.PlaceGetRes"
+			alias="placeGetRes" />
+		<typeAlias
+			type="project.studycafe.domain.place.model.GetAdminPlaceListReq"
+			alias="getAdminPlaceListReq" />
+		<typeAlias
+			type="project.studycafe.domain.place.model.PlaceGetListReq"
+			alias="placeGetListReq" />
+		<typeAlias
+			type="project.studycafe.domain.place.model.PlaceGetOptionListReq"
+			alias="placeGetOptionListReq" />
+		<typeAlias
+			type="project.studycafe.domain.place.model.GetPlaceOptionRes"
+			alias="getPlaceOptionRes" />
+		<typeAlias
+			type="project.studycafe.domain.place.model.GetPlacesByAreaCodeRes"
+			alias="getPlacesByAreaCodeRes" />
+		<typeAlias
+			type="project.studycafe.domain.place.model.AdminPlaceGetRes"
+			alias="adminPlaceGetRes" />
+		<typeAlias
+			type="project.studycafe.domain.place.model.UpdatePlaceModel"
+			alias="updatePlaceModel" />
+		
+		<typeAlias
+			type="project.studycafe.domain.place.entity.PlaceEntity"
+			alias="placeEntity" />
+		<typeAlias
+			type="project.studycafe.domain.place.entity.PlaceServiceEntity"
+			alias="placeServiceEntity" />
+		<typeAlias
+			type="project.studycafe.domain.place.entity.PlaceRateEntity"
+			alias="placeRateEntity" />
+			
+		<typeAlias type="project.studycafe.domain.place.dto.PlaceDTO"
+			alias="placeDTO" />
+		<typeAlias
+			type="project.studycafe.domain.place.dto.PlaceRateDTO"
+			alias="placeRateDTO" />
+		<typeAlias
+			type="project.studycafe.domain.place.dto.PlaceServiceDTO"
+			alias="placeServiceDTO" />
+			
+		<typeAlias
+			type="project.studycafe.domain.seats.model.GetMySeatReq"
+			alias="getMySeatReq" />
+		<typeAlias
+			type="project.studycafe.domain.seats.model.ReturnMySeatReq"
+			alias="returnMySeatReq" />
+		<typeAlias
+			type="project.studycafe.domain.seats.model.CheckSeatAvailabilityReq"
+			alias="checkSeatAvailabilityReq" />
+		<typeAlias
+			type="project.studycafe.domain.seats.model.CheckMyReservationStatusReq"
+			alias="checkMyReservationStatusReq" />
+		<typeAlias
+			type="project.studycafe.domain.seats.model.GetReservedSeatListRes"
+			alias="getReservedSeatListRes" />
+		<typeAlias
+			type="project.studycafe.domain.seats.model.GetReservedSeatListForReturnRes"
+			alias="getReservedSeatListForReturnRes" />
+		<typeAlias
+			type="project.studycafe.domain.seats.entity.SeatsEntity"
+			alias="seatsEntity" />
+		<typeAlias
+			type="project.studycafe.domain.seats.model.GetMySeatTicketCodeReq"
+			alias="getMySeatTicketCodeReq" />
+		
+		<typeAlias
+			type="project.studycafe.domain.ticket.entity.TicketEntity"
+			alias="ticketEntity" />
+		<typeAlias
+			type="project.studycafe.domain.ticket.model.CheckTicketAvailabilityReq"
+			alias="checkTicketAvailabilityReq" />
+		<typeAlias
+			type="project.studycafe.domain.ticket.model.CheckTicketAvailabilityRes"
+			alias="checkTicketAvailabilityRes" />
+		<typeAlias
+			type="project.studycafe.domain.ticket.model.MyTicketRes"
+			alias="myTicketRes" />
+		<typeAlias
+			type="project.studycafe.domain.ticket.model.PatchTicketCodeReq"
+			alias="patchTicketCodeReq" />
+		<typeAlias
+			type="project.studycafe.domain.ticket.model.PatchTicketReservReq"
+			alias="patchTicketReservReq" />
+		<typeAlias
+			type="project.studycafe.domain.ticket.model.UpdateResidualTimeReq"
+			alias="updateResidualTimeReq" />
+		<typeAlias
+			type="project.studycafe.domain.ticket.model.GetResidualTimeReq"
+			alias="getResidualTimeReq" />
+	
+		<typeAlias
+			type="project.studycafe.domain.util.PlaceImageEntity"
+			alias="placeImageEntity" />
+		<typeAlias type="project.studycafe.domain.util.ImageDTO"
+			alias="imageDTO" />
+		<typeAlias type="project.studycafe.domain.util.PlaceImageDTO"
+			alias="placeImageDTO" />
+		<typeAlias
+			type="project.studycafe.domain.util.UserImageEntity"
+			alias="userImageEntity" />
+
+	</typeAliases>
+
+</configuration>

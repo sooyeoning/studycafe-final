@@ -1,0 +1,334 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper
+	namespace="project.studycafe.domain.place.mapper.PlaceMapper">
+
+	<select id="getPlace" parameterType="int"
+		resultMap="placeGetRes">
+		select
+			p.id,
+			p.phone,
+			p.name,
+			p.address,
+			p.area_code,
+			pr.rate_id,
+			pr.price,
+			ps.service_id,
+			ps.fee_status,
+			ps.price_paid,
+			i.upload_file_name
+		from places p
+		left join place_rate pr on p.id = pr.place_id
+		left join place_service ps on p.id = ps.place_id
+		left join place_image i on p.id = i.place_id and i.role = 'thumbnail'
+		where
+		p.id = #{id}
+	</select>
+
+	<!-- 장소 수정폼에 들어갈 기존 정보 가져오기 -->
+	<select id="getAdminPlaceById" parameterType="int"
+		resultMap="updatePlaceModel">
+		select
+			p.id,
+			p.phone,
+			p.name,
+			p.address,
+			p.area_code,
+			pr.id,
+			pr.rate_id,
+			pr.price,
+			ps.id,
+			ps.service_id,
+			ps.fee_status,
+			ps.price_paid,
+			i.upload_file_name,
+			CASE WHEN i.role = 'thumbnail' THEN i.upload_file_name END AS thumbnail_file_name,
+        	CASE WHEN i.role = 'normal' THEN i.upload_file_name END AS normal_file_name,
+			CASE WHEN i.role = 'price' THEN i.upload_file_name END AS price_file_name
+		from places p
+		left join place_rate pr on p.id = pr.place_id
+		left join place_service ps on p.id = ps.place_id
+		left join place_image i on p.id = i.place_id
+		where p.id = #{id}
+		order by
+		ps.service_id asc ;
+	</select>
+
+	<insert id="insertPlace" parameterType="placeEntity"
+		useGeneratedKeys="true" keyProperty="id">
+		insert into
+			places(
+			name,
+			address,
+			area_code,
+			phone)
+		values(
+			#{name},
+			#{address},
+			#{areaCode},
+			#{phone})
+	</insert>
+
+	<insert id="insertService" parameterType="placeServiceEntity">
+		insert into
+		place_service(
+			place_id,
+			service_id,
+			fee_status,
+			price_paid)
+		values(
+			#{placeId},
+			#{serviceId},
+			#{feeStatus},
+			#{pricePaid})
+	</insert>
+
+	<insert id="insertRate" parameterType="placeRateEntity">
+		insert into
+			place_rate(
+			place_id,
+			rate_id,
+			price)
+		values(
+			#{placeId},
+			#{rateId},
+			#{price})
+	</insert>
+	
+	<select id="getPlacesByAreaCode" parameterType="String" resultType="getPlacesByAreaCodeRes">
+		select id, name
+		from places
+		where area_code = #{areaCode}
+	</select>
+	
+	<!-- 사용자 검색 -->
+	<select id="getPlaces" resultMap="placeGetRes"
+		parameterType="placeGetListReq">
+		select
+			p.id,
+			p.phone,
+			p.name,
+			p.address,
+			p.area_code,
+			pr.rate_id,
+			pr.price,
+			ps.service_id,
+			ps.fee_status,
+			ps.price_paid,
+			i.upload_file_name
+		from places p
+		join place_rate pr on p.id= pr.place_id
+		join place_service ps on p.id = ps.place_id and ps.fee_status != 'N/A'
+		left join place_image i on p.id = i.place_id and i.role = 'thumbnail'
+		<where>
+			<if test="areaCode != '99'">
+				and p.area_code = #{areaCode}
+			</if>
+			<if test="name != ''">
+				and p.name like concat('%', #{name}, '%')
+			</if>
+			<if test="rateId != null">
+				and pr.rate_id = #{rateId}
+			</if>
+			<if test="serviceIdtotalCount > 0">
+				and p.id in
+				(SELECT p.id
+				 FROM places p
+				 JOIN place_service ps ON p.id = ps.place_id
+				 WHERE ps.service_id in
+					<foreach item="id" collection="placeServiceIdList" open="(" separator="," close=")">
+   				 		#{id}
+  					</foreach>
+  				 	and ps.fee_status != 'N/A'
+  				GROUP BY p.id
+  				HAVING COUNT(DISTINCT ps.service_id) = #{serviceIdtotalCount})
+			</if>
+		</where>
+		<if test="rateId != null">
+			order by pr.price asc
+		</if>
+	</select>
+
+	<!-- 관리자 검색 (리스트) -->
+	<!-- 기본 검색: db의 전체 장소의 모든 정보 조회 -->
+	<select id="getAdminPlaces" resultMap="placeGetRes"
+		parameterType="getAdminPlaceListReq">
+		select
+		p.id,
+		p.name,
+		p.address,
+		p.phone,
+		pr.rate_id,
+		pr.price,
+		s.service_id,
+		s.fee_status,
+		s.price_paid
+		from places p
+		left join place_rate pr on p.id = pr.place_id
+		left join
+		place_service s on p.id = s.place_id
+		left join place_image i on p.id =
+		i.place_id and i.role='thumbnail'
+		<where>
+			<if test="areaCode != '99'">
+				and p.area_code = #{areaCode}
+			</if>
+			<if test="name != ''">
+				and p.name like concat('%', #{name}, '%')
+			</if>
+
+		</where>
+	</select>
+
+	<update id="updatePlace" parameterType="placeEntity">
+		update places
+		set
+		name = #{name},
+		address = #{address},
+		area_code = #{areaCode},
+		phone = #{phone}
+		where id = #{id}
+	</update>
+
+	<update id="updateRate" parameterType="placeRateEntity">
+		update place_rate
+		set
+		price = #{price}
+		where
+		rate_id = #{rateId} and
+		place_id = #{placeId}
+	</update>
+
+	<update id="updateService" parameterType="placeServiceEntity">
+		update place_service
+		set
+		price_paid = #{pricePaid},
+		fee_status = #{feeStatus}
+		where
+		service_id = #{serviceId} and
+		place_id = #{placeId}
+	</update>
+
+	<delete id="deletePlace" parameterType="int">
+		delete from places
+		where
+		id=#{id}
+	</delete>
+
+	<!-- 매장이름으로 매장 중복 체크 -->
+	<select id="checkPlaceNameExist" parameterType="String"
+		resultType="Integer">
+		select exists(
+			select 1 from places
+			where name like concat('%', #{name}, '%')) as name
+	</select>
+
+	<insert id="insertReservation" parameterType="seatsEntity">
+		insert into seats
+		(place_id, id, user_id, seat_status, start_time)
+		values
+		(#{placeId}, #{id}, #{userId}, #{seatStatus}, current_timestamp)
+	</insert>
+	
+	<select id="getReservedSeatList" parameterType="int" resultType="int">
+		select id
+		from seats
+		where place_id = #{placeId} and seat_status = "Y"
+	</select>
+
+	<select id="getMyReservedSeatId" parameterType="getMySeatReq" resultType="int">
+		select id
+		from seats
+		where user_id = #{userId} and place_id=#{placeId} and seat_status = "Y"
+	</select>
+	
+	<delete id="returnMySeat" parameterType="returnMySeatReq">
+		delete from seats
+		where id = #{seatId} and user_id = #{userId} and seat_status = "Y"
+	</delete>
+	
+	<resultMap id="updatePlaceModel" type="UpdatePlaceModel">
+		<id column="id" property="id" />
+
+		<association property="placeDTO" resultMap="placeMap" />
+		<association property="thumbnail" resultMap="placeThumbnailImgMap" />
+		<association property="price" resultMap="placePriceImgMap" />
+		<collection property="multipartFiles" resultMap="placeNormalImgMap" />
+		<collection property="placeRateDTOList" resultMap="rateMap" />
+		<collection property="placeServiceDTOList"
+			resultMap="serviceMap" />
+
+	</resultMap>
+
+	<resultMap type="placeImageDTO" id="placeThumbnailImgMap">
+		<id property="placeId" column="place_id" />
+		<result property="uploadFileName" column="thumbnail_file_name" />
+		<result property="role" column="role" />
+	</resultMap>
+	<resultMap type="placeImageDTO" id="placeNormalImgMap">
+		<id property="placeId" column="place_id" />
+		<result property="uploadFileName" column="normal_file_name" />
+		<result property="role" column="role" />
+	</resultMap>
+	<resultMap type="placeImageDTO" id="placePriceImgMap">
+		<id property="placeId" column="place_id" />
+		<result property="uploadFileName" column="price_file_name" />
+		<result property="role" column="role" />
+	</resultMap>
+	
+	<resultMap id="getPlaceOptionRes" type="GetPlaceOptionRes">
+		<id column="id" property="id" />
+		<result column="name" property="name" />
+		<result column="address" property="address" />
+		<result column="area_code" property="areaCode" />
+		<result column="phone" property="phone" />
+
+		<collection property="placeServiceDTOList"
+			resultMap="serviceMap" />
+		<collection property="placeRateDTOList" resultMap="rateMap" />
+	</resultMap>
+
+	<resultMap id="placeGetRes" type="PlaceGetRes">
+		<id column="id" property="id" />
+		<result column="name" property="name" />
+		<result column="address" property="address" />
+		<result column="area_code" property="areaCode" />
+		<result column="phone" property="phone" />
+
+		<association property="imageDTO" resultMap="imageMap" />
+		<collection property="placeRateDTOList" resultMap="rateMap" />
+		<collection property="placeServiceDTOList"
+			resultMap="serviceMap" />
+	</resultMap>
+
+	<resultMap type="placeRateDTO" id="rateMap">
+		<result property="id" column="id" />
+		<result property="placeId" column="place_id" />
+		<result property="rateId" column="rate_id" />
+		<result property="price" column="price" />
+	</resultMap>
+
+	<resultMap type="PlaceServiceDTO" id="serviceMap">
+		<result property="id" column="id" />
+		<result property="placeId" column="place_id" />
+		<result property="serviceId" column="service_id" />
+		<result property="feeStatus" column="fee_status" />
+		<result property="pricePaid" column="price_paid" />
+	</resultMap>
+
+	<resultMap type="imageDTO" id="imageMap">
+		<id property="placeId" column="place_id" />
+		<result property="uploadFileName" column="upload_file_name" />
+	</resultMap>
+
+	<resultMap type="PlaceDTO" id="placeMap">
+		<id property="id" column="id" />
+		<result column="name" property="name" />
+		<result column="address" property="address" />
+		<result column="area_code" property="areaCode" />
+		<result column="phone" property="phone" />
+	</resultMap>
+
+</mapper>
