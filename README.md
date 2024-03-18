@@ -1,7 +1,4 @@
 
-
-https://capsule-render.vercel.app/api?type=waving&color=auto&height=300&section=header&text=StudyCafe&fontSize=90
-
 ### 🖥️ 프로젝트 소개
 
 ---
@@ -47,16 +44,14 @@ https://capsule-render.vercel.app/api?type=waving&color=auto&height=300&section=
 
 - **한 지점당 한개의 좌석권만 등록가능/ 등록된 좌석권 사용만료 후 다른 좌석권 등록**
 
-![13.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/b38975f6-25f7-45c2-9b61-77624f0669c6/09e98d33-8317-4626-9b92-027de5be0ab0/13.png)
-
+![13](https://github.com/sooyeoning/studycafe-final/assets/135004060/bf0bef1f-c710-460c-b075-59d00a11ae5d)
 - **좌석권 구매** : 좌석권 db 등록
 - **좌석권 리스트 조회** : 사용자가 구매한 좌석권 목록 조회
     
     → 잔여시간 '00:00:00' 인 좌석권 : 지점 등록 불가
     
 
-![14.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/b38975f6-25f7-45c2-9b61-77624f0669c6/332768ca-14eb-4e2a-b075-5bc57e014c63/14.png)
-
+![14](https://github.com/sooyeoning/studycafe-final/assets/135004060/699a0771-97f0-425a-91b6-127887eca1de)
 - **좌석권 지점 등록/수정**
     - 좌석권 등록 페이지로 이동 후 지점 등록/수정
     - 성공시: 좌석 예약 페이지로 이동
@@ -71,8 +66,7 @@ https://capsule-render.vercel.app/api?type=waving&color=auto&height=300&section=
 
 - **동시간에 한지점만 사용 가능**
 
-![15.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/b38975f6-25f7-45c2-9b61-77624f0669c6/b745d4a8-2d47-4142-be19-a11f2c52e1e9/15.png)
-
+![15](https://github.com/sooyeoning/studycafe-final/assets/135004060/a133c4fa-984d-4d5e-a338-de0151b25ab6)
 - **비회원**
     - 지점별 좌석도 조회 : 지점별 좌석도, 예약된 좌석 조회
     - Exception 처리
@@ -85,9 +79,8 @@ https://capsule-render.vercel.app/api?type=waving&color=auto&height=300&section=
         회원가입시 입력한 사용자의 사용지점의 좌석도(+예약된 좌석, 예약된 내 좌석) 조회
         
     
-    ![16.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/b38975f6-25f7-45c2-9b61-77624f0669c6/723a03a3-c93e-46e4-9d1c-4baf1b4fa06d/16.png)
-    
-    ![17.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/b38975f6-25f7-45c2-9b61-77624f0669c6/abf419f3-d337-4075-aaa6-e29ff06ba255/17.png)
+   ![16](https://github.com/sooyeoning/studycafe-final/assets/135004060/1ed960fc-b6d7-4370-8452-e9a48a325159)
+   ![17](https://github.com/sooyeoning/studycafe-final/assets/135004060/fea5800f-12b5-4d8d-b173-e5ccde10d0b7)
     
     - **좌석 예약**
     - Exception 처리
@@ -96,8 +89,7 @@ https://capsule-render.vercel.app/api?type=waving&color=auto&height=300&section=
         등록된 좌석권이 없는 경우(NotRegisteredTicketException) → 오류메시지 alert
         
     
-    ![18.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/b38975f6-25f7-45c2-9b61-77624f0669c6/aeec03bf-f979-41c7-961d-b3c6914fb9fb/18.png)
-    
+    ![18](https://github.com/sooyeoning/studycafe-final/assets/135004060/9662dbae-4d1d-46ca-afd1-422b6d328053)    
     - **동시성 예약 문제 고려(@Transactional)**
         
         다른 회원이 해당 좌석을 이미 예약한 경우(AlreadyReservedSeatException) 
@@ -105,7 +97,7 @@ https://capsule-render.vercel.app/api?type=waving&color=auto&height=300&section=
         →  서비스 제한(오류메시지 alert)
         
     
-    ![19.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/b38975f6-25f7-45c2-9b61-77624f0669c6/7849846d-dc83-4de9-adc0-bd7b4abef4a8/19.png)
+    ![19](https://github.com/sooyeoning/studycafe-final/assets/135004060/bde1d1e7-145a-48cc-875e-17115e478738)
     
     - **좌석 반납**
     - **좌석권 사용기간 만료에 따른 자동반납**
@@ -124,8 +116,7 @@ https://capsule-render.vercel.app/api?type=waving&color=auto&height=300&section=
             
 ### 회원가입 & 로그인 & 아이디 찾기/ 비밀번호 찾기
 
-![1 - 복사본.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/b38975f6-25f7-45c2-9b61-77624f0669c6/79428e0c-c6b8-4d69-a5b0-ec4be6c8b523/1_-_%EB%B3%B5%EC%82%AC%EB%B3%B8.png)
-
+![1 - 복사본](https://github.com/sooyeoning/studycafe-final/assets/135004060/9e27b50f-9be9-4951-9c32-9a8393a1bbd5)
 - **회원가입**
     - 유효 검사(@Valid 사용)
         
@@ -143,7 +134,7 @@ https://capsule-render.vercel.app/api?type=waving&color=auto&height=300&section=
         기본 숨김으로 설정 → 아이콘 이용해 비밀번호 노출, 숨김 가능
         
 
-![4.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/b38975f6-25f7-45c2-9b61-77624f0669c6/a28de373-179a-4a84-bc89-ecbde21d8401/4.png)
+![4](https://github.com/sooyeoning/studycafe-final/assets/135004060/8d33bacf-08d9-4d8d-b268-b38ef7c81702)
 
 - **로그인**
     - 비밀번호 일치 확인(passwordEncoder 사용)
@@ -155,14 +146,14 @@ https://capsule-render.vercel.app/api?type=waving&color=auto&height=300&section=
         기본 숨김으로 설정 → 아이콘 이용해 비밀번호 노출, 숨김 가능
         
 
-![2.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/b38975f6-25f7-45c2-9b61-77624f0669c6/1db13d7e-f1c4-4691-a16b-5c62f7f89786/2.png)
+![2](https://github.com/sooyeoning/studycafe-final/assets/135004060/c979b380-b82f-4ee6-adfb-6a830a804db2)
 
 - **아이디 찾기**
     - 유효 검사(@Valid 사용)  : 이름, 이메일
     - 이름, 이메일 일치 시 아이디 조회 가능
     - 부분 마스크처리: 마스킹된 아이디 노출
 
-![3.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/b38975f6-25f7-45c2-9b61-77624f0669c6/0a1af04f-b234-40a7-ae32-50af713ceb6c/3.png)
+![3](https://github.com/sooyeoning/studycafe-final/assets/135004060/fdd7fdb0-2975-47e1-afb0-fb34bc2337c1)
 
 - **비밀번호 찾기**
     - 유효 검사(@Valid 사용)  : 아이디, 이메일
@@ -187,7 +178,7 @@ https://capsule-render.vercel.app/api?type=waving&color=auto&height=300&section=
 
 ### 마이페이지
 
-![5.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/b38975f6-25f7-45c2-9b61-77624f0669c6/1b535647-b277-48b6-9b95-2af1c8f1ee91/5.png)
+![5](https://github.com/sooyeoning/studycafe-final/assets/135004060/a5aa40d8-c85b-4621-8c39-e750c6717cc7)
 
 - **회원 중복확인**
     - 재로그인 : 로그인된 아이디에 맞는 비밀번호 재입력하여 로그인
@@ -198,16 +189,16 @@ https://capsule-render.vercel.app/api?type=waving&color=auto&height=300&section=
         기본 숨김으로 설정 → 아이콘 이용해 비밀번호 노출, 숨김 가능
         
 
-![6.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/b38975f6-25f7-45c2-9b61-77624f0669c6/46707537-753d-4d77-b48f-9a767bf8b56a/6.png)
+![6](https://github.com/sooyeoning/studycafe-final/assets/135004060/6081e740-e011-4e68-a314-fa80380522b9)
 
 - **회원 정보 수정**
     - 프로필 사진 변경
     - 중복(duplicate) 확인 : 닉네임
     - 정보 수정 : 이름, 닉네임, 관심 지역, 사용 지점
 
-![7.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/b38975f6-25f7-45c2-9b61-77624f0669c6/108cb330-e4a0-4952-9bc9-f915dabb6581/7.png)
+![7](https://github.com/sooyeoning/studycafe-final/assets/135004060/c2423082-db6b-4706-b7eb-19eeb94aef8a)
 
-![8.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/b38975f6-25f7-45c2-9b61-77624f0669c6/aeac45bf-e990-4028-a6e9-48221be3ac0e/8.png)
+![8](https://github.com/sooyeoning/studycafe-final/assets/135004060/adfb693c-2479-49c8-ab01-1f574521fd0c)
 
 - **회원 비밀번호 수정**
     - 비밀번호 수정 : 현재 비밀번호, 새 비밀번호
@@ -226,9 +217,9 @@ https://capsule-render.vercel.app/api?type=waving&color=auto&height=300&section=
         기본 숨김으로 설정 →  아이콘 이용해 비밀번호 노출, 숨김 가능
         
 
-![9.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/b38975f6-25f7-45c2-9b61-77624f0669c6/7a7f7b34-0645-4733-89d6-c44307ee0102/9.png)
+![9](https://github.com/sooyeoning/studycafe-final/assets/135004060/d6c85f57-b06c-4b2f-9248-4c651f0f84e8)
 
-![10.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/b38975f6-25f7-45c2-9b61-77624f0669c6/ee82cd95-595a-44c6-bc80-252dfeb85f19/10.png)
+![10](https://github.com/sooyeoning/studycafe-final/assets/135004060/97a4aee1-7038-47ee-bfee-ae1e61bd071d)
 
 - **회원 탈퇴**
     - 재로그인 : 입력값이 로그인한 회원(아이디, 비밀번호)와 일치하는지 확인
@@ -242,7 +233,7 @@ https://capsule-render.vercel.app/api?type=waving&color=auto&height=300&section=
 
 ### 메인페이지(지점검색, 상세페이지)
 
-![11.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/b38975f6-25f7-45c2-9b61-77624f0669c6/df04dfeb-860a-44f8-bcab-10b9cd3e7de4/11.png)
+![11](https://github.com/sooyeoning/studycafe-final/assets/135004060/ab0277c1-7292-466c-97d1-7d860d8e3c1f)
 
 - **필터를 이용한 장소 조회**
     - 지점 검색 : 지역별, 시간별(좌석권), 지점명 선택하여 기본 검색
@@ -251,7 +242,7 @@ https://capsule-render.vercel.app/api?type=waving&color=auto&height=300&section=
     - 제공되는 서비스 무료/유료 여부 노출
     - 지점 클릭시 지점 상세페이지로 이동
 
-![12.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/b38975f6-25f7-45c2-9b61-77624f0669c6/ef17120c-a0da-4490-86e5-b8c6bbad3463/12.png)
+![12](https://github.com/sooyeoning/studycafe-final/assets/135004060/05fa0ab4-1f0a-42f7-a70f-565ebbbc9040)
 
 - **지점** **상세페이지**
     - 지점 사진 제공 : 장소 대표 사진, 상세 사진, 가격표 사진
@@ -263,34 +254,33 @@ https://capsule-render.vercel.app/api?type=waving&color=auto&height=300&section=
 
 ### 관리자 페이지
 
-![20.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/b38975f6-25f7-45c2-9b61-77624f0669c6/0914b7e5-7ca5-4149-b463-a626d6d99382/20.png)
+![20](https://github.com/sooyeoning/studycafe-final/assets/135004060/1691a2a2-433f-40d7-822f-76445e2a1629)
 
 - **장소 조회**
     - 지점 검색 : 지역별, 지점명 선택하여 기본 검색
     - 지점명 클릭시 장소 상세페이지로 이동
 
-![21.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/b38975f6-25f7-45c2-9b61-77624f0669c6/1789ba3f-5296-42e2-bf84-aa11717f476f/21.png)
+![21](https://github.com/sooyeoning/studycafe-final/assets/135004060/5e437f2f-1a01-4774-afa5-e5f01e769898)
 
 - **지점 상세페이지**
     - 지점 사진 제공 : 장소 대표 사진, 상세 사진, 가격표 사진
     - 지점 위치를 지도로 제공(카카오 API 사용)
     - 지점 상세 정보 노출 : 주소, 전화번호/ 가격 정보/ 제공 서비스
 
-![22.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/b38975f6-25f7-45c2-9b61-77624f0669c6/d9f7aa2e-945c-4a19-8402-a8d0f89e3936/22.png)
+![22](https://github.com/sooyeoning/studycafe-final/assets/135004060/aa1c521c-40b6-4854-9ac7-832f32361ae9)
 
 - **지점 등록**
     - 유효 검사(@Valid 사용) : 기본정보(NotBlank), 가격정보(typeMismatch), 서비스 정보
     - 지점 대표 사진 등록
 
-![23.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/b38975f6-25f7-45c2-9b61-77624f0669c6/cc71aef7-6bdb-46ed-a42c-8fb4e1e979a7/23.png)
+![23](https://github.com/sooyeoning/studycafe-final/assets/135004060/081a519d-42bc-4af5-aa5a-35ee88ca5d2c)
 
 - **지점 수정**
     - 지점 가격표 사진, 상세 사진 추가 등록
     - 기존 정보 제공 후 정보 수정
     
 
-![24.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/b38975f6-25f7-45c2-9b61-77624f0669c6/4ff83148-00c3-47ec-95e7-38e23dd9edc2/24.png)
+![24](https://github.com/sooyeoning/studycafe-final/assets/135004060/4bdc6aca-5b45-4b6b-a354-46c7330a225e)
 
 - **장소 삭제**
 
-https://capsule-render.vercel.app/api?type=waving&color=auto&height=200&section=footer
