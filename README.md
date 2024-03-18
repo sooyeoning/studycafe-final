@@ -35,6 +35,7 @@
 **IDE** : STS4
 
 **DB** : Mysql
+![studycafe_db](https://github.com/sooyeoning/studycafe-final/assets/135004060/2b1804d2-6e47-47a3-bb03-319b08d3e176)
 
 
 ### 📌 주요 기능
