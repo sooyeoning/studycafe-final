@@ -3,12 +3,10 @@ package project.studycafe.domain.util;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 import lombok.ToString;
 import project.studycafe.domain.place.model.Role;
 
 @Getter
-@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
@@ -18,7 +16,6 @@ public class PlaceImageEntity {
 	
 	private String filePath;
 	
-	//user pk
 	private int placeId;
 	
 	private String originFileName;
@@ -28,6 +25,16 @@ public class PlaceImageEntity {
 	private String uploadDate;
 	
 	private Role role;
+
+	public PlaceImageEntity(String filePath, int placeId, String originFileName, String uploadFileName,
+			Role role) {
+		this.filePath = filePath;
+		this.placeId = placeId;
+		this.originFileName = originFileName;
+		this.uploadFileName = uploadFileName;
+		this.role = role;
+	}
 	
-	//public static PlaceImageEntity toEntity(PlaceImage)
+	
+	
 }

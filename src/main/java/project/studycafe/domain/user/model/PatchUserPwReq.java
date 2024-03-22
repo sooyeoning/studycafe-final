@@ -1,6 +1,5 @@
 package project.studycafe.domain.user.model;
 
-
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 

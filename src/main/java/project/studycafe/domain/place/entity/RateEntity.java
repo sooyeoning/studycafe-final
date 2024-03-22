@@ -1,6 +1,5 @@
 package project.studycafe.domain.place.entity;
 
-import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 
 @Getter

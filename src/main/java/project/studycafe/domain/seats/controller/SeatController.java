@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import project.studycafe.domain.seats.controller.exception.AlreadyReservedSeatException;
 import project.studycafe.domain.seats.controller.exception.AlreadyReservedUserException;
 import project.studycafe.domain.seats.controller.exception.NotExistsLoginInformationException;
@@ -33,7 +32,6 @@ import project.studycafe.domain.user.SeatsDTO;
 
 @Controller
 @RequiredArgsConstructor
-@Slf4j
 public class SeatController {
 
 	private final SeatServiceImpl seatService;
@@ -113,8 +111,13 @@ public class SeatController {
 			throw new NotExistsLoginInformationException();
 		}
 		int userId = (int)session.getAttribute("id");
-		GetMySeatTicketCodeReq req = new GetMySeatTicketCodeReq(userId,seatId);
-		seatService.returnMySeat(req);
+		
+		if((Integer)seatId == 0) {
+			throw new NotExistsMyReservedSeatIdException();
+		} else {			
+			GetMySeatTicketCodeReq req = new GetMySeatTicketCodeReq(userId,seatId);
+			seatService.returnMySeat(req);
+		}
 	}
 	
 	@GetMapping("/seats/buy")

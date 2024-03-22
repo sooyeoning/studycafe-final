@@ -2,7 +2,6 @@ package project.studycafe.domain.util;
 
 import org.springframework.web.multipart.MultipartFile;
 
-import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

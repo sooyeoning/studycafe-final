@@ -296,8 +296,12 @@ function returnSeat(mySeat){
 			alert("좌석이 반납되었습니다.");
 			location.reload();
 		},
-		error: function(e){
-			console.log(e);
+		error: function(response){
+			if(response.responseJSON.code == 4201){
+				alert("예약된 좌석만 반납 가능합니다.");
+			} else {
+				alert("좌석 반납 중 오류가 발생했습니다. 다시 시도해주세요");
+			}
 		}
 	})
 }

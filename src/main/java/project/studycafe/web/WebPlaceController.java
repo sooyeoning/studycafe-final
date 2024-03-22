@@ -7,14 +7,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import project.studycafe.domain.place.model.UpdatePlaceModel;
 import project.studycafe.domain.place.service.PlaceServiceImpl;
 
 @Controller
 @RequestMapping("place")
 @RequiredArgsConstructor
-@Slf4j
 public class WebPlaceController {
 
 	private final PlaceServiceImpl placeService;
@@ -39,7 +37,6 @@ public class WebPlaceController {
 	public String getPlaceUpdateForm(@RequestParam int id, Model model) {
 		UpdatePlaceModel updatePlaceModel = placeService.getAdminPlaceById(id);
 		model.addAttribute("updatePlaceModel", updatePlaceModel);
-		log.info(updatePlaceModel.toString());
 		return "admin/updatePlaceForm";
 	}
 

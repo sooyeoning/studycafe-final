@@ -1,7 +1,5 @@
 package project.studycafe.domain.seats.model;
 
-import java.sql.Timestamp;
-
 import lombok.*;
 
 @Getter

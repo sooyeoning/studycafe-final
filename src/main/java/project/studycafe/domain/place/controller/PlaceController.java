@@ -31,6 +31,7 @@ import project.studycafe.domain.place.model.Role;
 import project.studycafe.domain.place.model.UpdatePlaceModel;
 import project.studycafe.domain.place.service.PlaceServiceImpl;
 import project.studycafe.domain.util.FileService;
+import project.studycafe.domain.util.UpdatePlaceImgReq;
 
 @Controller
 @RequiredArgsConstructor
@@ -69,6 +70,7 @@ public class PlaceController {
 			return "place/placeInsertForm";
 		} 
 		String name = placePostReq.getPlaceDTO().getName();
+		
 		DuplicatePlaceCheckReq req = new DuplicatePlaceCheckReq(name);
 		if(placeService.checkPlaceNameExist(req.getName()) == 1){
 			bindingResult.rejectValue("placeDTO.name", "duplicate.name", "이미 등록된 지점입니다.");
@@ -77,10 +79,10 @@ public class PlaceController {
 			int placeId = placeService.insertPlace(placePostReq);
 			log.info("placeId: {}"+placeId);
 			if (placePostReq.getPlaceImageDTO().getFile().getSize() > 0) { // 첨부된 이미지가 있는 경우
-				placePostReq.getPlaceImageDTO().setPlaceId(placeId);
-				Role thumbnail = Role.THUMBNAIL;
+				
+				UpdatePlaceImgReq updateImgReq = new UpdatePlaceImgReq(placePostReq.getPlaceImageDTO().getFile(),placeId, Role.THUMBNAIL);
+				fileService.uploadPlaceImage(updateImgReq);
 
-				fileService.uploadPlaceImage(placePostReq.getPlaceImageDTO(),thumbnail);
 			}
 
 			//exception 처리
@@ -120,31 +122,12 @@ public class PlaceController {
 			log.info("bindingResult: {}", bindingResult);
 			return "admin/updatePlaceForm";
 		} else {
-			int result = placeService.updatePlace(updatePlaceModel);
-			int placeId = updatePlaceModel.getId();
-
-			// 대표이미지 업로드
-			if (updatePlaceModel.getThumbnail().getFile().getSize() > 0) {
-				Role thumbnail = Role.THUMBNAIL;
-				updatePlaceModel.getThumbnail().setPlaceId(placeId);
-				fileService.uploadPlaceImage(updatePlaceModel.getThumbnail(), thumbnail);
-			}
-
-			// 상세이미지 업로드 - MultipartFile 빈 껍데기 존재함
-			for (int i = 0; i < updatePlaceModel.getMultipartFiles().size(); i++){
-				if (updatePlaceModel.getMultipartFiles().size() > 0) { // 파일 첨부되어있는지 확인
-					Role normal = Role.NORMAL;		 			
-					fileService.fileToEntity(updatePlaceModel.getMultipartFiles().get(i), placeId, normal);
-
-				}
-			}
-
-			// 가격표 이미지 업로드
-			if (updatePlaceModel.getPrice().getFile().getSize() > 0) {
-				Role price = Role.PRICE;
-				updatePlaceModel.getPrice().setPlaceId(placeId);
-				fileService.uploadPlaceImage(updatePlaceModel.getPrice(), price);
-			}
+			
+			//장소 정보 수정
+			placeService.updatePlace(updatePlaceModel);
+			
+			//장소 모든 이미지 업로드
+			fileService.updateAllPlaceImage(updatePlaceModel);
 			
 			return "admin/updatePlaceFormSuccess";
 

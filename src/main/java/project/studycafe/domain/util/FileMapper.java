@@ -3,7 +3,6 @@ package project.studycafe.domain.util;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
-import org.springframework.web.multipart.MultipartFile;
 
 @Mapper
 public interface FileMapper {

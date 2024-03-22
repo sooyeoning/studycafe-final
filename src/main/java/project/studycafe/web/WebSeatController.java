@@ -7,14 +7,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import project.studycafe.domain.seats.controller.exception.NotExistsLoginInformationException;
 import project.studycafe.domain.user.model.GetPlaceInfoByUserIdRes;
 import project.studycafe.domain.user.service.UserServiceImpl;
 
 @Controller
 @RequiredArgsConstructor
-@Slf4j
 public class WebSeatController {
 
 	private final UserServiceImpl userService;

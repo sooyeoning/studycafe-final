@@ -3,10 +3,8 @@ package project.studycafe.domain.util;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @Getter
-@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserImageEntity {
@@ -22,4 +20,13 @@ public class UserImageEntity {
 	private String uploadFileName;
 	
 	private String uploadDate;
+
+	public UserImageEntity(String filePath, int userId, String originFileName, String uploadFileName) {
+		this.filePath = filePath;
+		this.userId = userId;
+		this.originFileName = originFileName;
+		this.uploadFileName = uploadFileName;
+	}
+	
+	
 }

@@ -2,8 +2,6 @@ package project.studycafe.domain.place.entity;
 
 import project.studycafe.domain.place.dto.PlaceRateDTO;
 
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 @Getter
@@ -13,10 +11,7 @@ import lombok.*;
 @AllArgsConstructor
 @ToString
 public class PlaceRateEntity {
-	/*
-	 * @NotNull(message = "2시간 요금은 필수 입력 항목입니다.") private Integer twoHrs;
-	 */
-
+	
 	private int id;
 	
 	private int placeId;
@@ -25,10 +20,10 @@ public class PlaceRateEntity {
 
 	private int price;
 	
-	public static PlaceRateEntity toEntity(PlaceRateDTO placeRateDTO) {
+	public static PlaceRateEntity toEntity(PlaceRateDTO placeRateDTO, int placeId) {
 		return PlaceRateEntity.builder()
 				.id(placeRateDTO.getId())
-				.placeId(placeRateDTO.getPlaceId())
+				.placeId(placeId)
 				.rateId(placeRateDTO.getRateId())
 				.price(placeRateDTO.getPrice())
 				.build();

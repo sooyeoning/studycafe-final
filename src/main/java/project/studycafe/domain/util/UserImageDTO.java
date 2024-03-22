@@ -19,5 +19,7 @@ public class UserImageDTO {
     private MultipartFile userImage;
     
 	private int userId;
+	
+	
 		
 }

@@ -3,6 +3,7 @@ package project.studycafe.domain.place.service;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -49,24 +50,19 @@ public class PlaceServiceImpl implements PlaceService {
 	 */
 	@Override
 	public int insertPlace(PlacePostReq placePostReq) {
-		
-		// 장소 중복 여부 확인 - exception 처리 SQLIntegrityConstraintViolationException
-		
+				
 		// dto -> entity
 		//insertPlace 의 반환값이 place id
 		PlaceEntity placeEntity = PlaceEntity.toEntity(placePostReq.getPlaceDTO());
 		placeMapper.insertPlace(placeEntity);
 		int placeId = placeEntity.getId();
-		//placePostReq.setPlaceId(placeId); //imageDTO에 필요한 placeId
 
 		for (PlaceRateDTO placeRateDTO : placePostReq.getPlaceRateDTOList()) {
-			placeRateDTO.setPlaceId(placeId);
-			PlaceRateEntity placeRateEntity = PlaceRateEntity.toEntity(placeRateDTO);
+			PlaceRateEntity placeRateEntity = PlaceRateEntity.toEntity(placeRateDTO, placeId);
 			placeMapper.insertRate(placeRateEntity);
 		}
 		for (PlaceServiceDTO placeServiceDTO : placePostReq.getPlaceServiceDTOList()) {
-			placeServiceDTO.setPlaceId(placeId);
-			PlaceServiceEntity placeServiceEntity = PlaceServiceEntity.toEntity(placeServiceDTO);
+			PlaceServiceEntity placeServiceEntity = PlaceServiceEntity.toEntity(placeServiceDTO, placeId);
 			placeMapper.insertService(placeServiceEntity);
 		}
 
@@ -85,31 +81,22 @@ public class PlaceServiceImpl implements PlaceService {
 	}
 
 	@Override
-	public int updatePlace(UpdatePlaceModel updatePlaceModel) {
+	@Transactional
+	public void updatePlace(UpdatePlaceModel updatePlaceModel) {
 		int placeId = updatePlaceModel.getId();
 		updatePlaceModel.getPlaceDTO().setId(placeId);
 		
 		PlaceEntity placeEntity = PlaceEntity.toEntity(updatePlaceModel.getPlaceDTO());
-		int placeResult = placeMapper.updatePlace(placeEntity);
+		placeMapper.updatePlace(placeEntity);
 
 		for (PlaceRateDTO placeRateDTO : updatePlaceModel.getPlaceRateDTOList()) {
-			placeRateDTO.setPlaceId(placeId);
-			PlaceRateEntity placeRateEntity = PlaceRateEntity.toEntity(placeRateDTO);
+			PlaceRateEntity placeRateEntity = PlaceRateEntity.toEntity(placeRateDTO,placeId);
 			placeMapper.updateRate(placeRateEntity);
-			log.info("placeRateEntity: {}", placeRateEntity.toString());
 		}
 		for (PlaceServiceDTO placeServiceDTO : updatePlaceModel.getPlaceServiceDTOList()) {
-			placeServiceDTO.setPlaceId(placeId);
-			PlaceServiceEntity placeServiceEntity = PlaceServiceEntity.toEntity(placeServiceDTO);
-			log.info("placeServiceEntity: {}", placeServiceEntity.toString());
+			PlaceServiceEntity placeServiceEntity = PlaceServiceEntity.toEntity(placeServiceDTO, placeId);
 			placeMapper.updateService(placeServiceEntity);
 		}
-
-		int result = 0;
-		if (placeResult > 0) {
-			result = 1;
-		}
-		return result;
 
 	}
 
@@ -156,30 +143,7 @@ public class PlaceServiceImpl implements PlaceService {
 	}
 
 	public void changeFeeStatusEnToKr(PlaceServiceDTO placeServiceDTO) {
-
-		if (placeServiceDTO.getFeeStatus() != null) {
-			Integer serviceId = placeServiceDTO.getServiceId();
-			if(serviceId == 14 || serviceId == 15 || serviceId == 16 ) {
-				if (placeServiceDTO.getFeeStatus().equals("free")) {
-					placeServiceDTO.setFeeStatus("");
-				}
-				if (placeServiceDTO.getFeeStatus().equals("N/A")) {
-					placeServiceDTO.setFeeStatus("미제공");
-				}
-			} else {
-				if (placeServiceDTO.getFeeStatus().equals("free")) {
-					placeServiceDTO.setFeeStatus("무료");
-				}
-				if (placeServiceDTO.getFeeStatus().equals("paid")) {
-					placeServiceDTO.setFeeStatus("유료");
-				}
-				if (placeServiceDTO.getFeeStatus().equals("N/A")) {
-					placeServiceDTO.setFeeStatus("미제공");
-				}
-			}
-			
-		}
-
+		placeServiceDTO.changeFeeStatusEnToKr(placeServiceDTO);
 	}
 
 	public List<GetPlacesByAreaCodeRes> getPlaceListForTicket(String areaCode) {

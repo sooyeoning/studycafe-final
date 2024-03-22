@@ -21,10 +21,10 @@ public class PlaceServiceEntity {
 	
 	private int pricePaid; //가격
 
-	public static PlaceServiceEntity toEntity(PlaceServiceDTO placeServiceDTO) {
+	public static PlaceServiceEntity toEntity(PlaceServiceDTO placeServiceDTO, int placeId) {
 		return PlaceServiceEntity.builder()
 				.id(placeServiceDTO.getId())
-				.placeId(placeServiceDTO.getPlaceId())
+				.placeId(placeId)
 				.serviceId(placeServiceDTO.getServiceId())
 				.feeStatus(placeServiceDTO.getFeeStatus())
 				.pricePaid(placeServiceDTO.getPricePaid())

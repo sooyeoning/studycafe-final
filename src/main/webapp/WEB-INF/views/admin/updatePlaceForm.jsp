@@ -129,7 +129,7 @@
 				<div class="input-group" style="width: 50%;">
 					<form:hidden path="placeRateDTOList[0].rateId" value="6" />
 					<form:input type="number" class="form-control" id="charge10Hrs"
-						path="placeRateDTOList[0].price"/>
+						path="placeRateDTOList[0].price" />
 					<span class="input-group-text">원</span>
 				</div>
 					<small class="col-red ml-270">
@@ -145,7 +145,7 @@
 				<div class="input-group" style="width: 50%;">
 					<form:hidden path="placeRateDTOList[1].rateId" value="7" />
 					<form:input type="number" class="form-control" id="charge30Hrs"
-						path="placeRateDTOList[1].price"/>
+						path="placeRateDTOList[1].price" />
 					<span class="input-group-text">원</span>
 				</div>
 					<small class="col-red ml-270">
@@ -673,14 +673,14 @@
 			</div>
 			<div class="col-md-8">
 				<c:choose>
-					<c:when test="${empty updatePlaceModel.thumbnail.uploadFileName} ">
+					<c:when test="${empty updatePlaceModel.thumbnailImageDTO.uploadFileName} ">
 						<img id="previewThumb" class="thumbnail" src="../images/noimage.jpg"/><br>
 					</c:when>
 					<c:otherwise>
-						<img id="previewThumb" class="thumbnail" src="http://localhost:8080/mypage/${updatePlaceModel.thumbnail.uploadFileName }"/><br>
+						<img id="previewThumb" class="thumbnail" src="http://localhost:8080/mypage/${updatePlaceModel.thumbnailImageDTO.uploadFileName }"/><br>
 					</c:otherwise>
 				</c:choose>
-				<input type="file" name="thumbnail.file" id="thumbnail">
+				<input type="file" name="thumbnailImageDTO.file" id="thumbnail">
 			</div>
 		</div>	
 		<hr class="max-wd800 center hr-gray">
@@ -713,14 +713,14 @@
 			</div>
 			<div class="col-md-8">
 				<c:choose>
-					<c:when test="${empty updatePlaceModel.price.uploadFileName} ">
+					<c:when test="${empty updatePlaceModel.priceImageDTO.uploadFileName} ">
 						<img id="previewPrice" class="price" src="../images/noimage.jpg"/><br>
 					</c:when>
 					<c:otherwise>
-						<img id="previewPrice" class="price" src="http://localhost:8080/mypage/${updatePlaceModel.price.uploadFileName }"/><br>
+						<img id="previewPrice" class="price" src="http://localhost:8080/mypage/${updatePlaceModel.priceImageDTO.uploadFileName }"/><br>
 					</c:otherwise>
 				</c:choose>
-				<input type="file" name="price.file" id="price">
+				<input type="file" name="priceImageDTO.file" id="price">
 			</div>
 		</div>
 			

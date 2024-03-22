@@ -1,6 +1,5 @@
 package project.studycafe.domain.place.model;
 
-
 import lombok.*;
 
 import java.util.List;

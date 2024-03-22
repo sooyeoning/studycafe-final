@@ -156,21 +156,19 @@
 	<select id="getAdminPlaces" resultMap="placeGetRes"
 		parameterType="getAdminPlaceListReq">
 		select
-		p.id,
-		p.name,
-		p.address,
-		p.phone,
-		pr.rate_id,
-		pr.price,
-		s.service_id,
-		s.fee_status,
-		s.price_paid
+			p.id,
+			p.name,
+			p.address,
+			p.phone,
+			pr.rate_id,
+			pr.price,
+			s.service_id,
+			s.fee_status,
+			s.price_paid
 		from places p
 		left join place_rate pr on p.id = pr.place_id
-		left join
-		place_service s on p.id = s.place_id
-		left join place_image i on p.id =
-		i.place_id and i.role='thumbnail'
+		left join place_service s on p.id = s.place_id
+		left join place_image i on p.id =i.place_id and i.role='thumbnail'
 		<where>
 			<if test="areaCode != '99'">
 				and p.area_code = #{areaCode}
@@ -185,36 +183,36 @@
 	<update id="updatePlace" parameterType="placeEntity">
 		update places
 		set
-		name = #{name},
-		address = #{address},
-		area_code = #{areaCode},
-		phone = #{phone}
+			name = #{name},
+			address = #{address},
+			area_code = #{areaCode},
+			phone = #{phone}
 		where id = #{id}
 	</update>
 
 	<update id="updateRate" parameterType="placeRateEntity">
 		update place_rate
 		set
-		price = #{price}
+			price = #{price}
 		where
-		rate_id = #{rateId} and
-		place_id = #{placeId}
+			rate_id = #{rateId} and
+			place_id = #{placeId}
 	</update>
 
 	<update id="updateService" parameterType="placeServiceEntity">
 		update place_service
 		set
-		price_paid = #{pricePaid},
-		fee_status = #{feeStatus}
+			price_paid = #{pricePaid},
+			fee_status = #{feeStatus}
 		where
-		service_id = #{serviceId} and
-		place_id = #{placeId}
+			service_id = #{serviceId} and
+			place_id = #{placeId}
 	</update>
 
 	<delete id="deletePlace" parameterType="int">
 		delete from places
 		where
-		id=#{id}
+			id=#{id}
 	</delete>
 
 	<!-- 매장이름으로 매장 중복 체크 -->
@@ -253,8 +251,8 @@
 		<id column="id" property="id" />
 
 		<association property="placeDTO" resultMap="placeMap" />
-		<association property="thumbnail" resultMap="placeThumbnailImgMap" />
-		<association property="price" resultMap="placePriceImgMap" />
+		<association property="thumbnailImageDTO" resultMap="placeThumbnailImgMap" />
+		<association property="priceImageDTO" resultMap="placePriceImgMap" />
 		<collection property="multipartFiles" resultMap="placeNormalImgMap" />
 		<collection property="placeRateDTOList" resultMap="rateMap" />
 		<collection property="placeServiceDTOList"

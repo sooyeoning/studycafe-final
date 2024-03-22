@@ -29,10 +29,10 @@ public class UpdatePlaceModel {
 	
 	private List<PlaceServiceDTO> placeServiceDTOList;
 
-	private PlaceImageDTO thumbnail;
+	private PlaceImageDTO thumbnailImageDTO;
 
 	private List<MultipartFile> multipartFiles;
 
-	private PlaceImageDTO price;
+	private PlaceImageDTO priceImageDTO;
 
 }

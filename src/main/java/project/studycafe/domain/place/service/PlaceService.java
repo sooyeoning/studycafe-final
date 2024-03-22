@@ -10,6 +10,7 @@ import project.studycafe.domain.place.model.PlacePostReq;
 import project.studycafe.domain.place.model.UpdatePlaceModel;
 
 public interface PlaceService {
+	
 	PlaceGetRes getPlace(int id);
 
 	int insertPlace(PlacePostReq placePostReq);
@@ -18,7 +19,7 @@ public interface PlaceService {
 
 	List<PlaceGetRes> getAdminPlaces(GetAdminPlaceListReq getAdminPlaceListReq);
 
-	int updatePlace(UpdatePlaceModel updatePlaceModel);
+	void updatePlace(UpdatePlaceModel updatePlaceModel);
 	
 	AdminPlaceGetRes getAdminPlace(int id);
 

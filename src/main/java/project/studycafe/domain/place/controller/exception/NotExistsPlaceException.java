@@ -4,7 +4,7 @@ public class NotExistsPlaceException extends RuntimeException{
 	private static final String MESSAGE = "noPlace";
 
 	public NotExistsPlaceException() {
-		super();
+		super(MESSAGE);
 	}
 
 }

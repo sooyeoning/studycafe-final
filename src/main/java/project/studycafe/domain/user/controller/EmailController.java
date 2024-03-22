@@ -1,6 +1,5 @@
 package project.studycafe.domain.user.controller;
 
-import project.studycafe.domain.user.model.FindPwReq;
 import project.studycafe.domain.user.service.UserServiceImpl;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -11,15 +10,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.support.RequestContextUtils;
 
 import java.util.Map;
@@ -32,7 +27,6 @@ import java.util.Random;
 public class EmailController {
 
 	private final JavaMailSender mailSender;
-	private final UserServiceImpl userService;
 	private final HttpServletRequest request;
 
 	/**

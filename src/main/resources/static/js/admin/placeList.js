@@ -94,9 +94,9 @@ function search(getAdminPlaceListReq) {
 				<div class="max-wd800 center">
 					<input type="checkbox" class="checkbox" value="${response[i].id}"/>
 				</div>
-				<div class="card mb-3 max-wd800 center cursor">
+				<div class="card mb-3 max-wd800 center">
 					<div class="row g-0">
-							<div class="card-body" >
+							<div class="card-body cursor" onclick="getPlaceDetail(${response[i].id})">
 								<h5 class="card-title">${response[i].name}</h5>
 								<p class="card-text">${response[i].address}</p>
 								<p class="card-text">${response[i].phone}</p>
@@ -314,4 +314,8 @@ function selectAll() {
 	$('.checkbox').each(function(index, item) {
 		item.checked = $('#selectAll').is(":checked");
 	})
+}
+
+function getPlaceDetail(placeId){
+	location.href="/place?placeId="+placeId;
 }

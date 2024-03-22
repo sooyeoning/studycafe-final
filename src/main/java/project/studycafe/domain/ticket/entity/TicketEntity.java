@@ -8,7 +8,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-import lombok.extern.slf4j.Slf4j;
 import project.studycafe.domain.ticket.TicketDTO;
 
 @Getter
@@ -17,7 +16,6 @@ import project.studycafe.domain.ticket.TicketDTO;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-@Slf4j
 public class TicketEntity {
 	
 	private String code;

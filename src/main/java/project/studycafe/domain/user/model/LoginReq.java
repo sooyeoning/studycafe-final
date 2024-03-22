@@ -1,6 +1,5 @@
 package project.studycafe.domain.user.model;
 
-
 import lombok.*;
 
 @Getter

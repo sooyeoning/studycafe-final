@@ -29,46 +29,19 @@ public class TicketServiceImpl {
 	
 	public String makeTicketCode(String ticketType) {
 		String ticketTypeChar = "";
+		String code = makeTicketTypeChar(ticketType,ticketTypeChar);
 		
-		if(ticketType.equals("charge10hrs")) {
-			ticketTypeChar = "C10"; 
-		}
-		if(ticketType.equals("charge30hrs")) {
-			ticketTypeChar = "C30"; 
-		}
-		if(ticketType.equals("charge50hrs")) {
-			ticketTypeChar = "C50"; 
-		}
-		if(ticketType.equals("charge100hrs")) {
-			ticketTypeChar = "C100"; 
-		}
-		if(ticketType.equals("charge150hrs")) {
-			ticketTypeChar = "C150"; 
-		}
-		if(ticketType.equals("charge200hrs")) {
-			ticketTypeChar = "C200"; 
-		}
-		if(ticketType.equals("unreserved1weeks")) {
-			ticketTypeChar = "UR1"; 
-		}
-		if(ticketType.equals("unreserved2weeks")) {
-			ticketTypeChar = "UR2"; 
-		}
-		if(ticketType.equals("unreserved4weeks")) {
-			ticketTypeChar = "UR4"; 
-		}
-		if(ticketType.equals("reserved4weeks")) {
-			ticketTypeChar = "R4"; 
-		}
-		String code = ticketTypeChar;
-		// log.info(String.valueOf(code.length()));
 		int originCode = code.length();
 		int num = 9 - originCode;
 
-		for(int i = 0; i < 1; i++) {
-			// 26 영소문자 범위
-			int Serial = (int)(Math.random() * 26);
-			code += (char)(Serial + 61);
+		//티켓코드가 3글자인경우
+		if(originCode==3) {
+			for(int i = 0; i < 1; i++) {
+				// 26 영소문자 범위
+				int Serial = (int)(Math.random() * 26);
+				code += (char)(Serial + 61);
+			}
+			num--;
 		}
 		
 		for(int i = 0; i < num; i++) {
@@ -91,65 +64,30 @@ public class TicketServiceImpl {
 		return code;
 	}
 	
+	public String makeTicketTypeChar(String ticketType, String ticketTypeChar) {
+		for(Ticket one: Ticket.values()) {
+			if(ticketType.equals(one.getEnglishName())) {
+				ticketTypeChar = one.name();
+			}			
+		}
+		return ticketTypeChar;
+	}
+	
 	public TicketTimeDTO calculateTime(String code) {
 		Duration residualTimes = null;
 		String name = "";
 		
-		if(!code.contains("C100") && code.contains("C10")) {
-			Ticket C10 = Ticket.C10;
-			residualTimes = Duration.ofHours(10);
-			name = C10.getName();
-		}
-		if(code.contains("C30")) {
-			Ticket C30 = Ticket.C30;
-			residualTimes = Duration.ofHours(30);
-			name = C30.getName();
-		}
-		if(code.contains("C50")) {
-			Ticket C50 = Ticket.C50;
-			residualTimes = Duration.ofHours(50);
-			name = C50.getName();
-		}
-		if(code.contains("C100")) {
-			Ticket C100 = Ticket.C100;
-			residualTimes = Duration.ofHours(100);
-			name = C100.getName();
-		}
-		if(code.contains("C150")) {
-			Ticket C150 = Ticket.C150;
-			residualTimes = Duration.ofHours(150);
-			name = C150.getName();
-		}
-		if(code.contains("C200")) {
-			Ticket C200 = Ticket.C200;
-			residualTimes = Duration.ofHours(200);
-			name = C200.getName();
-		}
-		if(code.startsWith("UR1")) {
-			Ticket UR1 = Ticket.UR1;
-			residualTimes = Duration.ofDays(7);
-			name = UR1.getName();
-		}
-		if(code.startsWith("UR2")) {
-			Ticket UR2 = Ticket.UR2;
-			residualTimes = Duration.ofDays(14);
-			name = UR2.getName();
-			//log.info(String.valueOf(duration));
-		}
-		if(code.startsWith("UR4")) {
-			Ticket UR4 = Ticket.UR4;
-			residualTimes = Duration.ofDays(28);
-			name = UR4.getName();
-		}
-		if(code.startsWith("R4")) {
-			Ticket R4 = Ticket.R4;
-			residualTimes = Duration.ofDays(28);
-			name = R4.getName();
+		for(Ticket ticket : Ticket.values()) {
+			if(code.startsWith(ticket.name())) {
+				name = ticket.getTicketName();
+				int time = ticket.getTime();
+				residualTimes = Duration.ofHours(time);
+			}
 		}
 		
 		TicketTimeDTO dto = new TicketTimeDTO(residualTimes, name);
 		return dto;
-	} 
+	}
 	
 	public void insertTicket(TicketDTO ticketDTO) {
 		log.info(TicketEntity.toEntity(ticketDTO).toString());
