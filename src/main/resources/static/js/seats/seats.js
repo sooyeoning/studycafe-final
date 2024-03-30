@@ -33,7 +33,7 @@ $(document).ready(function() {
 function getPlaceNameByUserId(){
 	let placeId;
 	$.ajax({
-		url: "http://localhost:8080/getPlaceName",
+		url: "/getPlaceName",
 		method: "GET",
 		async: false,
 		success: function(result){
@@ -54,7 +54,7 @@ function getPlaceNameByUserId(){
 function getSeatsImage(obj){
 	let placeId = obj.value;
 	$.ajax({
-		url: "http://localhost:8080/getSeatsImage/"+placeId,
+		url: "/getSeatsImage/"+placeId,
 		method: "GET",
 		success: function(result){
 			sessionStorage.setItem('currentPlaceId', placeId);

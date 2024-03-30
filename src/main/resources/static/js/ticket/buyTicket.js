@@ -23,7 +23,7 @@ $(document).ready(function() {
 
 function buyTicket(buyTicketReq){
 	$.ajax({
-		url: "http://localhost:8080/ticket/buy",
+		url: "/ticket/buy",
 		method: "POST",
 		data: JSON.stringify(buyTicketReq),	//직렬화
 		contentType: "application/json; charset=utf-8",
@@ -46,7 +46,7 @@ function buyTicket(buyTicketReq){
 
 function getTicketList(){
 	$.ajax({
-		url: "http://localhost:8080/ticket/list",
+		url: "/ticket/list",
 		method: "get",
 		success: function(response){
 			console.log("getTicketList "+response);

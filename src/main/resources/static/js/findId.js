@@ -31,7 +31,7 @@ $(document).ready(function() {
 function findId(findIdReq) {
 
 	$.ajax({
-		url: "http://localhost:8080/user/findId",
+		url: "/user/findId",
 		type: "POST",
 		contentType: "application/json; charset=utf-8",
 		data: JSON.stringify(findIdReq),

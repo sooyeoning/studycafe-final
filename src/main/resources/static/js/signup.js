@@ -26,7 +26,7 @@ $(document).ready(function() {
 
 function signup(userEntity) {
 	$.ajax({
-		url: "http://localhost:8080/user/post",
+		url: "/user/post",
 		type: "POST",
 		contentType: "application/json; charset=UTF-8",
 		data: JSON.stringify(userEntity),

@@ -128,7 +128,7 @@ function offSeat(seatNo) {
 function reserveSeat(postSeatReq){
 	console.log(postSeatReq);
 	$.ajax({
-		url: "http://localhost:8080/reserve/"+postSeatReq.seatId,
+		url: "/reserve/"+postSeatReq.seatId,
 		method: "POST",
 		data: JSON.stringify(postSeatReq),	//직렬화
 		contentType: "application/json; charset=utf-8",
@@ -168,7 +168,7 @@ function getMyReservedSeatId(newPlaceId) {
     console.log("getMyReservedSeatId, newPlaceId:" + newPlaceId);
     return new Promise((resolve, reject) => {
         $.ajax({
-            url: "http://localhost:8080/myseat/"+newPlaceId,
+            url: "/myseat/"+newPlaceId,
             method: "GET",
             contentType: "application/json; charset=utf-8",
             success: function (seatId) {
@@ -189,7 +189,7 @@ function getReservedSeatList(newPlaceId) {
     console.log("getReservedSeatList, newPlaceId:" + newPlaceId);
     return new Promise((resolve, reject) => {
         $.ajax({
-            url: "http://localhost:8080/seats/" + newPlaceId,
+            url: "/seats/" + newPlaceId,
             method: "GET",
             success: function (result) {
                 console.log(result);
@@ -290,7 +290,7 @@ function getReservedSeatList(newPlaceId){
 function returnSeat(mySeat){
 	console.log("ajax " +mySeat);
 	$.ajax({
-		url: "http://localhost:8080/return/"+mySeat,
+		url: "/return/"+mySeat,
 		method: "get",
 		success: function(){
 			alert("좌석이 반납되었습니다.");

@@ -20,7 +20,7 @@ $(document).ready(function() {
 function getPlace(placeId) {
 	let address;
 	$.ajax({
-		url: 'http://localhost:8080/place/' + placeId,
+		url: '/place/' + placeId,
 		type: "GET",
 		async: false,
 		success: function(response) {
@@ -31,7 +31,7 @@ function getPlace(placeId) {
 			//$(".thumbnail").attr("src", "http://localhost:8080/mypage/" + response.uploadFileName);
 
 			for (let fileName of response.uploadFileNames) {
-				$(".images").append(`<img class="max-wd800 mySlides" src="http://localhost:8080/mypage/${fileName}"/>`);
+				$(".images").append(`<img class="max-wd800 mySlides" src="/mypage/${fileName}"/>`);
 				//"http://localhost:8080/mypage/" + fileName
 			}
 
@@ -165,7 +165,7 @@ function getPlace(placeId) {
 
 				for (let fileName of response.uploadFileNames) {
 					if (fileName.includes('price')) {
-						$(".priceimage").attr('href', "http://localhost:8080/mypage/" + fileName);
+						$(".priceimage").attr('href', "/mypage/" + fileName);
 					}
 					//"http://localhost:8080/mypage/" + fileName
 				}

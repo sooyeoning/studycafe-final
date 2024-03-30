@@ -3,7 +3,7 @@ $(document).ready(function() {
 
 	
 	$(".findPwBtn").click(function() {
-		window.location.href="/user/findPw";
+		window.location.href="/findPw";
 	})
 	
 	

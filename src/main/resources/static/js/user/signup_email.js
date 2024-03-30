@@ -73,7 +73,7 @@ function checkEmailExists(email) {
 	//console.log(JSON.stringify(param));
 
 	$.ajax({
-		url: "http://localhost:8080/signup/emailDuplicateCheck",
+		url: "/signup/emailDuplicateCheck",
 		type: "POST",
 		data: JSON.stringify(param),
 		contentType: "application/json; charset=UTF-8",
@@ -91,7 +91,7 @@ function checkEmailExists(email) {
 function getEmailAuth(email) {
 	let authKey;
 	$.ajax({
-		url: "http://localhost:8080/email/sendAuth",
+		url: "/email/sendAuth",
 		type: "POST",
 		data: { email: email },
 		async: false,

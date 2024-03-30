@@ -72,7 +72,7 @@ $(document).ready(function() {
 function search(getAdminPlaceListReq) {
 	//http://localhost:8080/mypage/+response.uploadFileName
 	$.ajax({
-		url: "http://localhost:8080/place/adminList",
+		url: "/place/adminList",
 		type: "POST",
 		contentType: "application/json; charset=utf-8",
 		data: JSON.stringify(getAdminPlaceListReq),
@@ -296,7 +296,7 @@ function updatePlace(placeId){
 
 function deletePlace(id) {
 	$.ajax({
-		url: "http://localhost:8080/place/delete/" + id,
+		url: "/place/delete/" + id,
 		method: "DELETE",
 		success: function(response) {
 			alert(response);

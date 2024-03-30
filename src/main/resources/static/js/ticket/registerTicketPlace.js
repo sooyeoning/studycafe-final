@@ -43,18 +43,18 @@ $(document).ready(function() {
 	
 	//좌석권 예약화면으로 이동
 	$('.reserveSeatBtn').click(function(){
-		location.href="http://localhost:8080/seats"
+		location.href="/seats"
 	})
 	
 	//좌석권 구매화면으로 이동
 	$('.buyTicketBtn').click(function(){
-		location.href="http://localhost:8080/seats/buy"
+		location.href="/seats/buy"
 	})
 });
 
 function buyTicket(buyTicketReq){
 	$.ajax({
-		url: "http://localhost:8080/ticket/buy",
+		url: "/ticket/buy",
 		method: "POST",
 		data: JSON.stringify(buyTicketReq),	//직렬화
 		contentType: "application/json; charset=utf-8",
@@ -71,19 +71,19 @@ function buyTicket(buyTicketReq){
 
 function registerTicket(patchTicketCodeReq){
 	$.ajax({
-		url: "http://localhost:8080/ticket/add",
+		url: "/ticket/add",
 		method: "patch",
 		data: JSON.stringify(patchTicketCodeReq),
 		contentType: "application/json; charset=utf-8",
 		success: function(){
 			alert("성공적으로 등록이 완료되었습니다. 좌석 예약 페이지로 이동합니다.")
-			location.href="http://localhost:8080/seats"
+			location.href="/seats"
 		},
 		error: function(response){
 			console.log(response);
 			if(response.responseJSON.code == 4302){
 				alert("해당 지점에 이미 등록된 좌석권이 있습니다. 기존에 등록된 좌석권을 이용해주세요!");
-				location.href="http://localhost:8080/seats/buy";
+				location.href="/seats/buy";
 			}
 		}
 	})
@@ -91,7 +91,7 @@ function registerTicket(patchTicketCodeReq){
 
 function getPlaceList(areaCode){
 	$.ajax({
-		url: "http://localhost:8080/place/list?areaCode="+areaCode,
+		url: "/place/list?areaCode="+areaCode,
 		method: "GET",
 		success: function(response){
 			//사용가능한 지점 리스트 

@@ -40,7 +40,7 @@ function getSeatsImage(placeId){
 	return new Promise((resolve, reject) => {
 
 		$.ajax({
-			url: "http://localhost:8080/getSeatsImage/"+placeId,
+			url: "/getSeatsImage/"+placeId,
 			method: "GET",
 			success: function(result){
 				console.log("getSeatsImage start");
@@ -59,7 +59,7 @@ function getReservedSeatLists(newPlaceId){
 	console.log("getReservedSeatList, newPlaceId:"+newPlaceId);
 
 	$.ajax({
-		url: "http://localhost:8080/seats/"+newPlaceId,
+		url: "/seats/"+newPlaceId,
 		method: "get",
 		success: function(result){
 			console.log(result);

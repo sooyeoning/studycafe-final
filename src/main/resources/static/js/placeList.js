@@ -24,7 +24,7 @@ $(document).ready(function() {
 function search(placeGetReq) {
 
 	$.ajax({
-		url: "http://localhost:8080/place/list",
+		url: "/place/list",
 		type: "POST",
 		contentType: "application/json; charset=utf-8",
 		data: JSON.stringify(placeGetReq),

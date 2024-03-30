@@ -31,7 +31,7 @@ $(document).ready(function() {
 function findPw(findPwReq) {
 
 	$.ajax({
-		url: "http://localhost:8080/user/findPw",
+		url: "/user/findPw",
 		type: "POST",
 		contentType: "application/json; charset=utf-8",
 		data: JSON.stringify(findPwReq),

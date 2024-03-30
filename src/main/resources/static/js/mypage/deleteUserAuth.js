@@ -48,7 +48,7 @@ $(document).ready(function() {
 function login(loginReq) {
 	alert("시작")
 	$.ajax({
-		url: "http://localhost:8080/user/login",
+		url: "/user/login",
 		type: "POST",
 		contentType: "application/json; charset=utf-8",
 		data: JSON.stringify(loginReq),

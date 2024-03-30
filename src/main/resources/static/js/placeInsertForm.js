@@ -44,7 +44,7 @@ $(document).ready(function() {
 function saveBasicInfoAjax(placePostReq) {
 
 	$.ajax({
-		url: "http://localhost:8080/place/post",
+		url: "/place/post",
 		type: "POST",
 		contentType: "application/json; charset=utf-8",
 		data: JSON.stringify(placePostReq),
