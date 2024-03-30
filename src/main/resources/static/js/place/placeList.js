@@ -356,7 +356,7 @@ $(document).ready(function() {
 function search(placeGetReq) {
 
 	$.ajax({
-		url: "http://localhost:8080/place/list",
+		url: "/place/list",
 		type: "POST",
 		contentType: "application/json; charset=utf-8",
 		data: JSON.stringify(placeGetReq),
@@ -383,7 +383,7 @@ function search(placeGetReq) {
 					$(".result").append(`<div class="card max-wd800 center cursor mb-10">
 					<div class="row g-0">
 						<div class="col-md-4">
-							<img src="http://localhost:8080/mypage/${response[i].imageDTO.uploadFileName}" class="img-fluid rounded-start thumbnail" alt="...">
+							<img src="/mypage/${response[i].imageDTO.uploadFileName}" class="img-fluid rounded-start thumbnail" alt="...">
 						</div>
 						<div class="col-md-8">
 							<div class="card-body" id="${response[i].id}">

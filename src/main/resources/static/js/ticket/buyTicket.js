@@ -75,7 +75,7 @@ function getTicketList(){
 							<td>${response[i].residualTimes}</td>
 							<td>`+placeName+`</td>
 							<td>`+status+`</td>
-							<td><button class="addBtn" onClick="location.href='http://localhost:8080/ticket/add/${response[i].code}'">지점 등록/수정</button></td>
+							<td><button class="addBtn" onClick="location.href='/ticket/add/${response[i].code}'">지점 등록/수정</button></td>
 						</tr>`);
 					}
 				}
