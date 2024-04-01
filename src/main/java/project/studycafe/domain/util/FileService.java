@@ -19,7 +19,7 @@ import project.studycafe.domain.place.model.UpdatePlaceModel;
 public class FileService {
 
 	private final FileMapper fileMapper;
-	private static String IMAGE_PATH = "C:\\image_repo\\";
+	private static String IMAGE_PATH = "/app/was/apache-tomcat-9.0.87/webapps/upload/";
 
 	public void uploadUserImage(UserImageDTO userImageDTO) throws Exception {
 
