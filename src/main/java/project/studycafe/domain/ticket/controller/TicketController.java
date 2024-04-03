@@ -38,10 +38,6 @@ public class TicketController {
 	public void buyTicket(@RequestBody BuyTicketReq buyTicketReq) { //userId, 코드
 		log.info("ticketType: {}",buyTicketReq.getTicketType());
 		
-		if(session == null || session.getAttribute("id") == null) {
-			throw new NotExistsLoginInformationException();
-		}
-		
 		int userId = (int)session.getAttribute("id");
 		
 		TicketDTO ticketDTO = new TicketDTO();
@@ -78,9 +74,7 @@ public class TicketController {
 	@PatchMapping(path = "/ticket/add", consumes="application/json")
 	@ResponseBody
 	public void patchTicketCode(@RequestBody PatchTicketCodeReq patchTicketCodeReq) {
-		if(session == null || session.getAttribute("id") == null) {
-			throw new NotExistsLoginInformationException();
-		}
+		
 		int userId = (int)session.getAttribute("id");
 		
 		patchTicketCodeReq.setUserId(userId);
@@ -96,9 +90,7 @@ public class TicketController {
 	@GetMapping("/ticket/list")
 	@ResponseBody
 	public ResponseEntity<List<MyTicketRes>> getTicketList() {
-		if(session == null || session.getAttribute("id") == null) {
-			throw new NotExistsLoginInformationException();
-		}
+		
 		int userId = (int)session.getAttribute("id");
 		List<MyTicketRes> result = ticketService.getMyTickets(userId);
 		return ResponseEntity.ok().body(result);

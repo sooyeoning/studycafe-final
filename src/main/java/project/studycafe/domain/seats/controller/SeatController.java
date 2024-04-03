@@ -16,7 +16,6 @@ import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import project.studycafe.domain.seats.controller.exception.AlreadyReservedSeatException;
 import project.studycafe.domain.seats.controller.exception.AlreadyReservedUserException;
-import project.studycafe.domain.seats.controller.exception.NotExistsLoginInformationException;
 import project.studycafe.domain.seats.controller.exception.NotExistsMyReservedSeatIdException;
 import project.studycafe.domain.seats.controller.exception.NotRegisteredTicketException;
 import project.studycafe.domain.seats.model.CheckMyReservationStatusReq;
@@ -41,9 +40,6 @@ public class SeatController {
 	@PostMapping("/reserve/{id}")
 	@ResponseBody
 	public ResponseEntity<String> reserveSeat(@RequestBody PostSeatReq postSeatReq) {
-		if(session == null || session.getAttribute("id") == null) {
-			throw new NotExistsLoginInformationException();
-		}
 		
 		int userId = (int)session.getAttribute("id");
 		int placeId = postSeatReq.getPlaceId();
@@ -86,10 +82,6 @@ public class SeatController {
 	@ResponseBody
 	public ResponseEntity<Integer> getMyReservedSeatId(@PathVariable int newPlaceId) {
 		
-		if(session == null || session.getAttribute("id") == null) {
-			throw new NotExistsLoginInformationException();
-		}
-		
 		GetMySeatReq getMySeatReq = 
 				new GetMySeatReq(newPlaceId,(int)session.getAttribute("id"));		
 		
@@ -107,9 +99,6 @@ public class SeatController {
 	@ResponseBody
 	public void returnMySeat(@PathVariable int seatId, HttpServletRequest request) {
 	
-		if(session == null || session.getAttribute("id") == null) {
-			throw new NotExistsLoginInformationException();
-		}
 		int userId = (int)session.getAttribute("id");
 		
 		if((Integer)seatId == 0) {

@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -28,7 +27,7 @@ import project.studycafe.domain.user.service.UserServiceImpl;
 public class WebMypageController {
 
 	private final UserServiceImpl userService;
-	private final HttpServletRequest request;
+	private final HttpSession session;
 	private final PasswordEncoder passwordEncoder;
 	
 	@GetMapping("/info")
@@ -126,10 +125,8 @@ public class WebMypageController {
 		int result = userService.deleteUser(id);
 		
 		//세션을 삭제
-        HttpSession session = request.getSession(false);
-        if (session != null) {
-            session.invalidate();
-        }
+        session.invalidate();
+        
 		return result;
 	}
 }
