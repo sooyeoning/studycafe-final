@@ -10,7 +10,7 @@ public class WebMvcConfig implements WebMvcConfigurer{
 
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
-		registry.addResourceHandler("/mypage/**")
+		registry.addResourceHandler("/image/**")
 				//.addResourceLocations("file:///C:/image_repo/");
 				.addResourceLocations("file:/home/ec2-user/app/was/apache-tomcat-9.0.87/webapps/upload/");
 	}

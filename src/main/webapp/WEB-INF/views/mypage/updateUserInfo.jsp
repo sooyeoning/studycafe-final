@@ -47,7 +47,7 @@
 		<c:choose>
 			<c:when test="${not empty patchUserReq.uploadFileName }">
 				<img id="preview" class="profile"
-					src="http://localhost:8080/mypage/${patchUserReq.uploadFileName }" />
+					src="/image/${patchUserReq.uploadFileName }" />
 			</c:when>
 			<c:otherwise>
 				<img id="preview" class="profile" src="/images/basicProfile.png" />
