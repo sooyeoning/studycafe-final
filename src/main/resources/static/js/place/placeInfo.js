@@ -31,7 +31,7 @@ function getPlace(placeId) {
 			//$(".thumbnail").attr("src", "http://localhost:8080/mypage/" + response.uploadFileName);
 
 			for (let fileName of response.uploadFileNames) {
-				$(".images").append(`<img class="max-wd800 mySlides" src="/mypage/${fileName}"/>`);
+				$(".images").append(`<img class="max-wd800 mySlides" src="/image/${fileName}"/>`);
 				//"http://localhost:8080/mypage/" + fileName
 			}
 

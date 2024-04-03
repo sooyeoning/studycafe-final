@@ -65,7 +65,7 @@ public class UserServiceImpl implements UserService {
 		String userPw = loginReq.getUserPw();
 		
 		boolean passwordAuth = passwordEncoder.matches(userPw, userMapper.getUserPwByUserId(userId));
-			
+		log.info("로그인 매치 결과: "+passwordAuth);	
 			if(passwordAuth == true) {
 				UserEntity user = userMapper.login(userId);
 				HttpSession session = request.getSession();

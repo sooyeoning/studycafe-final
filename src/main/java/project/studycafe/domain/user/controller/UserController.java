@@ -117,10 +117,10 @@ public class UserController {
 		String dbUserId = userService.getUserIdByEmail(inputEmail);
 		
 		//서비스에서 체크 - db 이용
-		if(checkUserIdExist < 1 && inputUserId != "") {
+		if(checkUserIdExist < 1 || inputUserId == "") {
 			bindingResult.rejectValue("userId", "null.userId", "해당 아이디는 가입된 아이디가 아닙니다.");
 		}
-		if(checkEmailExist < 1 && inputEmail != "") {
+		if(checkEmailExist < 1 || inputEmail == "") {
 			bindingResult.rejectValue("email", "null.email", "해당 이메일은 가입된 이메일이 아닙니다.");
 		}
 		if(dbEmail != null && !dbEmail.equals(inputEmail)) {
