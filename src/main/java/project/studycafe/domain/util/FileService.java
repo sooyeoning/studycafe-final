@@ -19,7 +19,7 @@ import project.studycafe.domain.place.model.UpdatePlaceModel;
 public class FileService {
 
 	private final FileMapper fileMapper;
-	private static String IMAGE_PATH = "file:/home/ec2-user/app/was/apache-tomcat-9.0.87/webapps/upload/";
+	private static String IMAGE_PATH = "/home/ec2-user/app/was/apache-tomcat-9.0.87/webapps/upload/";
 	//private static String IMAGE_PATH = "C:/image_repo/";
 
 	public void uploadUserImage(UserImageDTO userImageDTO) throws Exception {
@@ -117,8 +117,7 @@ public class FileService {
 		// 상세이미지 업로드 - MultipartFile 빈 껍데기 존재함
 		for (int i = 0; i < updatePlaceModel.getMultipartFiles().size(); i++){
 			if (updatePlaceModel.getMultipartFiles().size() > 0) { // 파일 첨부되어있는지 확인
-				Role normal = Role.NORMAL;
-				UpdatePlaceImgReq req = new UpdatePlaceImgReq(updatePlaceModel.getMultipartFiles().get(i), placeId, normal);
+				UpdatePlaceImgReq req = new UpdatePlaceImgReq(updatePlaceModel.getMultipartFiles().get(i), placeId, Role.NORMAL);
 				uploadPlaceDetailImage(req);
 			}
 		}
