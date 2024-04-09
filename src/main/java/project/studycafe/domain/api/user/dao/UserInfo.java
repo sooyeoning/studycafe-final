@@ -12,13 +12,13 @@ import lombok.NoArgsConstructor;
 public class UserInfo {
 
 	private int id;
-	
+
 	private String role;
-	
+
 	private String nickname;
-	
+
 	private String userId;
-	
+
 	private int placeId;
-	
+
 }
